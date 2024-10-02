@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://d2m0ioc7fmoxv"]
+
+[ext_resource type="Script" path="res://canvas_layer.gd" id="1_bdb7q"]
+[ext_resource type="FontFile" uid="uid://cvt6gfforogr8" path="res://fonts/Xolonium-Regular.ttf" id="2_wghx0"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_bdb7q")
+
+[node name="scoreLabel" type="Label" parent="."]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_right = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_type_variation = &"HeaderLarge"
+theme_override_fonts/font = ExtResource("2_wghx0")
+text = "0"
+metadata/_edit_use_anchors_ = true
+
+[node name="message" type="Label" parent="."]
+offset_left = 152.0
+offset_top = 312.0
+offset_right = 632.0
+offset_bottom = 387.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_wghx0")
+text = "DODGE THE CREEPS"
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+offset_left = 144.0
+offset_top = 580.0
+offset_right = 344.0
+offset_bottom = 680.0
+theme_override_fonts/font = ExtResource("2_wghx0")
+text = "START"
+
+[node name="messageTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="Button" to="." method="HUD"]
+[connection signal="timeout" from="messageTimer" to="." method="HUD"]

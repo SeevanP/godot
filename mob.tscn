@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=3 uid="uid://dj7iori2w5xu0"]
+
+[ext_resource type="Script" path="res://mob.gd" id="1_d7tvl"]
+[ext_resource type="Texture2D" uid="uid://ti8oh4y5qkwk" path="res://art/enemyFlyingAlt_1.png" id="2_8m08k"]
+[ext_resource type="Texture2D" uid="uid://clm7apc40l1ge" path="res://art/enemyFlyingAlt_2.png" id="3_vkyab"]
+[ext_resource type="Texture2D" uid="uid://cnrd7johfvewr" path="res://art/enemySwimming_1.png" id="4_8gotq"]
+[ext_resource type="Texture2D" uid="uid://cgiino4launem" path="res://art/enemySwimming_2.png" id="5_bam6t"]
+[ext_resource type="Texture2D" uid="uid://dsa7e71duo41r" path="res://art/enemyWalking_1.png" id="6_1wilg"]
+[ext_resource type="Texture2D" uid="uid://dan3gby1c74a" path="res://art/enemyWalking_2.png" id="7_ktffx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x2qxu"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4tey0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_8m08k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_vkyab")
+}],
+"loop": true,
+"name": &"flying",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_8gotq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_bam6t")
+}],
+"loop": true,
+"name": &"swimming",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_1wilg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_ktffx")
+}],
+"loop": true,
+"name": &"walking",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gr5of"]
+radius = 33.0
+height = 100.0
+
+[node name="mob" type="RigidBody2D"]
+position = Vector2(-5, 2)
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_x2qxu")
+gravity_scale = 0.0
+script = ExtResource("1_d7tvl")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visibility_layer = 0
+position = Vector2(2.00001, 0.5)
+rotation = 1.5708
+scale = Vector2(0.715, 0.75)
+sprite_frames = SubResource("SpriteFrames_4tey0")
+animation = &"walking"
+frame = 1
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 5)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_gr5of")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
